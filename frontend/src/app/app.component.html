@@ -1,3 +1,10 @@
-<app-img></app-img>
+<p>
+  Padre: 
+  <input type="text" [(ngModel)]="imgParent">
+</p>
+
+<app-img 
+  [img]="imgParent"
+></app-img>
 
 <!-- <router-outlet></router-outlet> -->
