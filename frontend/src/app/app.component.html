@@ -3,7 +3,8 @@
   <input type="text" [(ngModel)]="imgParent">
 </p>
 
-<app-img 
+<app-img
+  (loaded)="onLoaded($event)"
   [img]="imgParent"
 ></app-img>
 
