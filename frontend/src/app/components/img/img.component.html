@@ -6,6 +6,11 @@
     (load)="imgLoaded()"
     *ngIf="img; else elseImg"
 >
+<hr>
+<h3>
+    {{ counter }}
+</h3>
+<hr>
 <ng-template #elseImg>
     <img
         width="200"

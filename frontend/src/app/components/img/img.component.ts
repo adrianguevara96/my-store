@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-img',
@@ -10,6 +10,23 @@ export class ImgComponent {
   @Input() img: string = '';
   @Output() loaded = new EventEmitter<string>();
   imageDefault: string = './assets/images/no-image.jpg';
+  counter = 0;
+  counterFn: number | undefined;
+
+  ngOnChanges( changes: SimpleChanges) {
+    console.log("changes: ", changes)
+  }
+
+  ngOnInit() {
+    this.counterFn = window.setInterval( () => {
+      this.counter += 1;
+      console.log('run counter');
+    }, 1000);
+  }
+
+  ngOnDestroy() {
+    window.clearInterval(this.counterFn);
+  }
 
   imgError() {
     this.img = this.imageDefault;

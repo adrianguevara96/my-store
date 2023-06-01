@@ -44,7 +44,13 @@ export class AppComponent {
     }
   ]
 
+  showImg: boolean = true;
+
   onLoaded(img: string) {
     console.log("log padre: ", img);
+  }
+
+  toogleImg() {
+    this.showImg = !this.showImg;
   }
 }
