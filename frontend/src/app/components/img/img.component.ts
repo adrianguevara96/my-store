@@ -7,7 +7,14 @@ import { Component, Input, Output, EventEmitter, SimpleChanges } from '@angular/
 })
 export class ImgComponent {
 
-  @Input() img: string = '';
+  img: string = '';
+  @Input('img')
+  set changeImg(newImg: string) {
+    this.img = newImg;
+    //code
+    console.log("img changed");
+  }
+
   @Output() loaded = new EventEmitter<string>();
   imageDefault: string = './assets/images/no-image.jpg';
   counter = 0;
