@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Product } from './models/product.model';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,39 @@ export class AppComponent {
   // imgParent = 'https://www.w3schools.com/howto/img_avatar.png';
 
   imgParent = '';
+
+  products: Product[] = [
+    {
+      id: '1',
+      name: 'Product 1',
+      image: './assets/images/no-image.jpg',
+      price: 100
+    },
+    {
+      id: '2',
+      name: 'Product 2',
+      image: './assets/images/no-image.jpg',
+      price: 350
+    },
+    {
+      id: '3',
+      name: 'Product 3',
+      image: './assets/images/no-image.jpg',
+      price: 500
+    },
+    {
+      id: '4',
+      name: 'Product 4',
+      image: './assets/images/no-image.jpg',
+      price: 1000
+    },
+    {
+      id: '5',
+      name: 'Product 5',
+      image: './assets/images/no-image.jpg',
+      price: 180
+    }
+  ]
 
   onLoaded(img: string) {
     console.log("log padre: ", img);
