@@ -1,16 +1,14 @@
 <img
-    width="200"
     [src]="img"
-    alt=""
     (error)="imgError()"
     (load)="imgLoaded()"
     *ngIf="img; else elseImg"
 >
-<hr>
-<h3>
+
+<!-- <h3>
     {{ counter }}
-</h3>
-<hr>
+</h3> -->
+
 <ng-template #elseImg>
     <img
         width="200"
