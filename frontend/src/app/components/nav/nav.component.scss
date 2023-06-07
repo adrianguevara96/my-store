@@ -18,6 +18,25 @@
             margin-right: 15px;
         }
     }
+
+    .side-menu {
+        position: fixed; //toda la pantalla
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: white;
+        display: flex;
+        flex-direction: column;
+
+        justify-content: flex-start;
+        transform: translateX(-100%); //ocultar
+        transition: all ease-out .5s;
+
+        &.active {
+            transform: translateX(0%); //mostrar
+        }
+    }
 }
 
 .hide-mobile {
