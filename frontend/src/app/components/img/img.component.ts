@@ -12,7 +12,7 @@ export class ImgComponent {
   set changeImg(newImg: string) {
     this.img = newImg;
     //code
-    console.log("img changed");
+    // console.log("img changed");
   }
 
   @Output() loaded = new EventEmitter<string>();
@@ -22,7 +22,7 @@ export class ImgComponent {
   counterFn: number | undefined;
 
   ngOnChanges( changes: SimpleChanges) {
-    console.log("changes: ", changes)
+    // console.log("changes: ", changes)
   }
 
   ngOnInit() {
@@ -41,8 +41,8 @@ export class ImgComponent {
   }
 
   imgLoaded() {
-    console.log("log hijo");
-    this.loaded.emit(this.img);
+    // console.log("log hijo");
+    // this.loaded.emit(this.img);
   }
 
 }
