@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
+import { ProductsService } from 'src/app/services/products.service';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-product-list',
@@ -11,42 +13,36 @@ export class ProductListComponent {
   myShoppingCart: Product[] = [];
   total:number = 0;
 
-  products: Product[] = [
-    {
-      id: '1',
-      name: 'Product 1',
-      image: './assets/images/no-image.jpg',
-      price: 100
-    },
-    {
-      id: '2',
-      name: 'Product 2',
-      image: './assets/images/no-image.jpg',
-      price: 350
-    },
-    {
-      id: '3',
-      name: 'Product 3',
-      image: './assets/images/no-image.jpg',
-      price: 500
-    },
-    {
-      id: '4',
-      name: 'Product 4',
-      image: './assets/images/no-image.jpg',
-      price: 1000
-    },
-    {
-      id: '5',
-      name: 'Product 5',
-      image: './assets/images/no-image.jpg',
-      price: 180
-    }
-  ];
+  products: Product[] = [];
+
+  today = new Date();
+  date = new Date(2021, 1, 21);
+
+  constructor(
+    private storeService: StoreService,
+    private productsService: ProductsService
+  ) {
+    this.myShoppingCart = this.storeService.getShoppingCart();
+  }
+
+  async ngOnInit() {
+    this.productsService.getAllProducts().subscribe({
+      next: (data) => {
+        console.log("data: ", data);
+        this.products = data;
+      },
+      error: (err) => {
+        console.log("err: ", err)
+      },
+      complete: () => {
+        console.info("complete")
+      }
+    })
+  }
 
   onAddToShoppingCart(product:Product) {
     // console.log(product);
-    this.myShoppingCart.push(product);
-    this.total = this.myShoppingCart.reduce( (sum, product) => sum + product.price, 0);
+    this.storeService.addProduct(product);
+    this.total = this.storeService.getTotal();
   }
 }
