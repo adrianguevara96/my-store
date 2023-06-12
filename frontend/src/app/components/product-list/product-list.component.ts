@@ -8,6 +8,9 @@ import { Product } from 'src/app/models/product.model';
 })
 export class ProductListComponent {
 
+  myShoppingCart: Product[] = [];
+  total:number = 0;
+
   products: Product[] = [
     {
       id: '1',
@@ -41,5 +44,9 @@ export class ProductListComponent {
     }
   ];
 
-  
+  onAddToShoppingCart(product:Product) {
+    // console.log(product);
+    this.myShoppingCart.push(product);
+    this.total = this.myShoppingCart.reduce( (sum, product) => sum + product.price, 0);
+  }
 }
