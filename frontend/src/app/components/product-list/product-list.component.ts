@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products.service';
 import { StoreService } from 'src/app/services/store.service';
@@ -8,10 +8,10 @@ import { StoreService } from 'src/app/services/store.service';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss']
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit{
 
   myShoppingCart: Product[] = [];
-  total:number = 0;
+  total = 0;
 
   products: Product[] = [];
 
