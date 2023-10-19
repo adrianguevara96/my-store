@@ -10,9 +10,16 @@ export class ProductComponent {
 
   @Input() product!: Product;
 
+  // send product added to product list component
   @Output() addedProduct = new EventEmitter<Product>();
+  // send product id to product list component
+  @Output() showProduct = new EventEmitter<string>();
 
   onAddToCart() {
     this.addedProduct.emit(this.product);
+  }
+
+  showDetail() {
+    this.showProduct.emit(this.product.id);
   }
 }
