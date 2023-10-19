@@ -47,6 +47,9 @@ export class ProductListComponent implements OnInit{
   }
 
   toggleProductDetail() {
+    const swiperEl = document.querySelector('swiper-container');
+    swiperEl?.swiper.slideTo(0);
+
     this.showProductDetail = !this.showProductDetail;
   }
 
@@ -57,6 +60,6 @@ export class ProductListComponent implements OnInit{
     this.product = this.products.find( product => {
       return product.id === id;
     });
-    console.log('product selected: ', this.product);
+    this.toggleProductDetail();
   }
 }
