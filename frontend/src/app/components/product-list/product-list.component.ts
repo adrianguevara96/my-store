@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateProductDTO, Product } from 'src/app/models/product.model';
+import { id } from 'date-fns/locale';
+import { CreateProductDTO, Product, UpdateProductDTO } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products.service';
 import { StoreService } from 'src/app/services/store.service';
 
@@ -26,7 +27,7 @@ export class ProductListComponent implements OnInit{
   }
 
   async ngOnInit() {
-    this.productsService.getAllProducts().subscribe({
+    this.productsService.getAll().subscribe({
       next: (data) => {
         console.log("data: ", data);
         this.products = data;
@@ -71,8 +72,39 @@ export class ProductListComponent implements OnInit{
       images: ['https://picsum.photos/200/300?random=1'],
       price: 5000
     }
-    this.productsService.createProduct(product).subscribe(data => {
+    this.productsService.create(product).subscribe(data => {
       this.products.unshift(data);
     });
+  }
+
+  updateProduct() {
+    const changes: UpdateProductDTO = {
+      ...this.product,
+      title: 'new title edited',
+    }
+    const id = this.product?.id;
+    if(id){
+      this.productsService.updatePUT(id, changes).subscribe(data => {
+        const indexProduct = this.products.findIndex(item => item.id === id);
+        this.products[indexProduct] = data;
+        this.product = data;
+      });
+    }else{
+      return;
+    }
+  }
+
+  deleteProduct() {
+    const id = this.product?.id;
+    if(id) {
+      this.productsService.delete(id).subscribe(data => {
+        console.log(data);
+        if(data){
+          const indexProduct = this.products.findIndex(item => item.id === id);
+          this.products.splice(indexProduct, 1);
+          this.showProductDetail = false;
+        }
+      })
+    }
   }
 }
