@@ -17,6 +17,10 @@ export class ProductListComponent implements OnInit{
   products: Product[] = [];
   product?: Product;
 
+  // pagination
+  limit = 10;
+  offset = 0;
+
   showProductDetail = false;
 
   constructor(
@@ -27,18 +31,25 @@ export class ProductListComponent implements OnInit{
   }
 
   async ngOnInit() {
-    this.productsService.getAll().subscribe({
-      next: (data) => {
-        console.log("data: ", data);
-        this.products = data;
-      },
-      error: (err) => {
-        console.log("err: ", err)
-      },
-      complete: () => {
-        console.info("complete")
-      }
-    })
+    // this.productsService.getAll().subscribe(
+    //   {
+    //     next: (data) => {
+    //       console.log("data: ", data);
+    //       this.products = data;
+    //     },
+    //     error: (err) => {
+    //       console.log("err: ", err)
+    //     },
+    //     complete: () => {
+    //       console.info("complete")
+    //     }
+    //   })
+
+    // this.productsService.getAllByPage(10,0).subscribe(data => {
+    //   this.products = data;
+    // });
+
+    this.loadMore();
   }
 
   onAddToShoppingCart(product:Product) {
@@ -106,5 +117,12 @@ export class ProductListComponent implements OnInit{
         }
       })
     }
+  }
+
+  loadMore() {
+    this.productsService.getAll(this.limit, this.offset).subscribe( data => {
+      this.products = this.products.concat(data);
+      this.offset += this.limit;
+    });
   }
 }
