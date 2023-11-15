@@ -108,12 +108,17 @@ export class ProductListComponent implements OnInit{
   deleteProduct() {
     const id = this.product?.id;
     if(id) {
-      this.productsService.delete(id).subscribe(data => {
-        console.log(data);
-        if(data){
-          const indexProduct = this.products.findIndex(item => item.id === id);
-          this.products.splice(indexProduct, 1);
-          this.showProductDetail = false;
+      this.productsService.delete(id).subscribe({
+        next: (data) => {
+          console.log(data);
+          if(data){
+            const indexProduct = this.products.findIndex(item => item.id === id);
+            this.products.splice(indexProduct, 1);
+            this.showProductDetail = false;
+          }
+        },
+        error: (err) => {
+          window.alert(err);
         }
       })
     }
