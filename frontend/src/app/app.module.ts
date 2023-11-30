@@ -14,6 +14,7 @@ import { ReversePipe } from './pipes/reverse.pipe';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { VowelsToNumberPipe } from './pipes/vowels-to-number.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
+import { LoginComponent } from './components/login/login.component';
 
 register();
 
@@ -27,7 +28,8 @@ register();
     ReversePipe,
     TimeAgoPipe,
     VowelsToNumberPipe,
-    HighlightDirective
+    HighlightDirective,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

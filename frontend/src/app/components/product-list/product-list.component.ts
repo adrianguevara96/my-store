@@ -119,6 +119,9 @@ export class ProductListComponent implements OnInit{
         },
         error: (err) => {
           window.alert(err);
+        },
+        complete: () => {
+          console.info('complete');
         }
       })
     }
