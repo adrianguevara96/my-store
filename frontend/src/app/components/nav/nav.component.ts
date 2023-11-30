@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { switchMap } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { StoreService } from 'src/app/services/store.service';
@@ -39,8 +40,10 @@ export class NavComponent implements OnInit {
   login() {
     this.authService.login('test1@test.com', '123456')
     .pipe(
-      switchMap( (login) => {
+      tap( (login) => {
         this.token = login.access_token;
+      }),
+      switchMap( (login) => {
         return this.authService.profile(login.access_token);
       } )
     )

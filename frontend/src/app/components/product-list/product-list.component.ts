@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { id } from 'date-fns/locale';
 import { CreateProductDTO, Product, UpdateProductDTO } from 'src/app/models/product.model';
 import { ProductsService } from 'src/app/services/products.service';
 import { StoreService } from 'src/app/services/store.service';
