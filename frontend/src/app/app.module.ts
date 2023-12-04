@@ -16,6 +16,7 @@ import { VowelsToNumberPipe } from './pipes/vowels-to-number.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
 import { LoginComponent } from './components/login/login.component';
 import { TimeInterceptor } from './interceptors/time.interceptor';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 register();
 
@@ -39,7 +40,8 @@ register();
     HttpClientModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: TimeInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: TimeInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

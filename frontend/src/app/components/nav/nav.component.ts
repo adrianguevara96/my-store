@@ -37,30 +37,31 @@ export class NavComponent implements OnInit {
     this.showMenu = !this.showMenu;
   }
 
-  login() {
-    this.authService.login('test1@test.com', '123456')
-    .pipe(
-      tap( (login) => {
-        this.token = login.access_token;
-      }),
-      switchMap( (login) => {
-        return this.authService.profile(login.access_token);
-      } )
-    )
-    .subscribe({
-      next: (user) => {
-        console.log('token user response: ', user);
-        this.profile = user;
-      },
-      error: (err) => {
-        console.log('err: ', err)
-      },
-    })
-  }
+  // login() {
+  //   this.authService.login('test1@test.com', '123456')
+  //   .pipe(
+  //     tap( (login) => {
+  //       this.token = login.access_token;
+  //     }),
+  //     switchMap( (login) => {
+  //       // return this.authService.profile(login.access_token);
+  //       return this.authService.profile();
+  //     } )
+  //   )
+  //   .subscribe({
+  //     next: (user) => {
+  //       console.log('token user response: ', user);
+  //       this.profile = user;
+  //     },
+  //     error: (err) => {
+  //       console.log('err: ', err)
+  //     },
+  //   })
+  // }
 
-  getProfile() {
-    this.authService.profile(this.token)
-    .subscribe(user => {
+  login() {
+    this.authService.loginAndGet('test1@test.com', '123456')
+    .subscribe( user => {
       this.profile = user;
     })
   }
