@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UsersService } from './services/users.service';
 import { AuthService } from './services/auth.service';
+import { FilesService } from './services/files.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ export class AppComponent {
   constructor(
     private userService: UsersService,
     private authService: AuthService,
+    private fileService: FilesService,
   ) {}
   // imgParent = 'https://www.w3schools.com/howto/img_avatar.png';
 
@@ -41,5 +43,10 @@ export class AppComponent {
     .subscribe(response => {
       console.log(response);
     })
+  }
+
+  downloadPDF() {
+    this.fileService.getFile('my.pdf', '/pdf.js/web/compressed.tracemonkey-pldi-09.pdf', 'application/pdf')
+    .subscribe()
   }
 }
