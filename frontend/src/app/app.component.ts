@@ -23,6 +23,9 @@ export class AppComponent {
   // token
   token = '';
 
+  // img
+  img = '';
+
   onLoaded(img: string) {
     console.log("log padre: ", img);
   }
@@ -48,5 +51,19 @@ export class AppComponent {
   downloadPDF() {
     this.fileService.getFile('my.pdf', '/pdf.js/web/compressed.tracemonkey-pldi-09.pdf', 'application/pdf')
     .subscribe()
+  }
+
+  onUpload(event: Event) {
+    const element = event.target as HTMLInputElement;
+
+    const file = element.files?.item(0);
+
+    if (file) {
+      this.fileService.uploadFile(file)
+      .subscribe( (data) => {
+        this.img = data.location;
+      })
+    }
+
   }
 }
